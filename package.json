@@ -1,0 +1,30 @@
+{
+  "name": "kill-switch",
+  "version": "1.0.0",
+  "description": "Make sure you can crash your node application",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && mocha",
+    "lint": "standard",
+    "coverage": "istanbul cover _mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eiriksm/kill-switch.git"
+  },
+  "keywords": [],
+  "author": "Eirik S. Morland <eirik@morland.no>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eiriksm/kill-switch/issues"
+  },
+  "homepage": "https://github.com/eiriksm/kill-switch#readme",
+  "devDependencies": {
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1",
+    "should": "^13.1.2",
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
+  }
+}
