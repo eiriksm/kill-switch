@@ -1,6 +1,6 @@
 {
   "name": "kill-switch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Make sure you can crash your node application",
   "main": "index.js",
   "scripts": {
