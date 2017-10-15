@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/eiriksm/kill-switch.git"
   },
+  "bin": {
+    "kill-switch": "./bin/kill-switch"
+  },
   "keywords": [],
   "author": "Eirik S. Morland <eirik@morland.no>",
   "license": "ISC",
@@ -26,5 +29,8 @@
     "should": "^13.1.2",
     "standard": "^10.0.3",
     "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "app-root-path": "^2.0.1"
   }
 }
