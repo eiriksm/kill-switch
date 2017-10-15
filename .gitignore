@@ -1,2 +1,4 @@
+.vscode
+.kill-switch.json
 coverage
 node_modules
