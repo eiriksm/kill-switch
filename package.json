@@ -1,17 +1,18 @@
 {
   "name": "kill-switch",
-  "version": "1.2.0",
+  "version": "0.0.0-development",
   "description": "Make sure you can crash your node application",
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "npm run lint && mocha",
     "lint": "standard",
-    "coverage": "istanbul cover _mocha"
+    "coverage": "istanbul cover _mocha",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eiriksm/kill-switch.git"
+    "url": "https://github.com/eiriksm/kill-switch.git"
   },
   "bin": {
     "kill-switch": "./bin/kill-switch"
@@ -31,7 +32,8 @@
     "mocha": "^4.0.1",
     "should": "^13.1.2",
     "standard": "^10.0.3",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "semantic-release": "^8.2.0"
   },
   "dependencies": {
     "app-root-path": "^2.0.1"

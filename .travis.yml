@@ -1,9 +1,20 @@
 language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
 node_js:
   - 6
   - 8
   - node
-sudo: false
+before_script:
+  - npm prune
+after_success:
+  - npm run semantic-release
 after_script:
   - npm run coverage
   - cat coverage/karma/*/lcov.info coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js > /dev/null 2>&1
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
