@@ -12,28 +12,32 @@ This module comes with 2 utilities: One is the server that you can start, to cra
 
 In its easiest usage, all you need to do is the following:
 
-### Install as dependency.
-```
+### Install as dependency
+```bash
 $ npm i -S kill-switch
 ```
 ### Create a config file
-```
+```bash
 $ echo '{"port": 3000,"secret": "secret"}' > .kill-switch.json
 ```
 ### Add kill-switch autostart to your app.
-```
+```js
 // Somewhere in your index.js or main app:
 const ks = require('kill-switch')
 ks.autoStart()
 ```
 ### Add an npm script to kill your app, and probably one for your continuous deployment
-```
+```json
 "scripts": {
   "start": "node index.js",
   "deploy": "STUPID_EXAMPLE_BUT git pull && npm i && npm run kill",
   "kill": "kill-switch"
 },
 ```
+
+## How does it work
+
+In its easiest usage the autostart server will use the config in your kill-switch config to start a server where it is ready to crash your app. Then when you deploy, the command line tool will look for the same config, and therefore know the server where it is supposed to request a path to kill your app. This way, after the deploy, your app will be reloaded, given you use some sort of process manager to restart your app automatically.
 
 ## API
 
