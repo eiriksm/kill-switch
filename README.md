@@ -1,5 +1,7 @@
 # kill-switch
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/eiriksm/kill-switch.svg)](https://greenkeeper.io/)
+
 [![Coverage Status](https://coveralls.io/repos/github/eiriksm/kill-switch/badge.svg?branch=master)](https://coveralls.io/github/eiriksm/kill-switch?branch=master)
 [![Build Status](https://travis-ci.org/eiriksm/kill-switch.svg?branch=master)](https://travis-ci.org/eiriksm/kill-switch)
 
