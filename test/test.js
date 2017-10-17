@@ -20,7 +20,7 @@ let arStub = {
 
 describe('All the things', () => {
   it('Should start a server and return something on a wrong secret', (done) => {
-    var ks = require('..').init(secret, port, (err, server) => {
+    let ks = require('..').init(secret, port, (err, server) => {
       should(err).equal(undefined)
       request.get('/')
         .expect(403)
@@ -33,8 +33,7 @@ describe('All the things', () => {
   })
 
   it('Should throw when using correct secret', (done) => {
-    var ks
-    ks = require('..').init(secret, port, (err, server) => {
+    let ks = require('..').init(secret, port, (err, server) => {
       should(err).equal(undefined)
       server.on('killed', () => {
         server.close()
