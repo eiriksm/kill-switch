@@ -1,7 +1,7 @@
 /* global it, describe */
 'use strict'
 const proxyquire = require('proxyquire')
-require('should')
+const should = require('should')
 const port = 3000
 const secret = 'secret'
 const request = require('supertest')('http://localhost:' + port)
@@ -20,11 +20,12 @@ let arStub = {
 
 describe('All the things', () => {
   it('Should start a server and return something on a wrong secret', (done) => {
-    var ks = require('..')(secret, port, () => {
+    var ks = require('..').init(secret, port, (err, server) => {
+      should(err).equal(undefined)
       request.get('/')
         .expect(403)
         .end((err, res) => {
-          ks.stop()
+          server.close()
           done(err)
         })
     })
@@ -33,12 +34,12 @@ describe('All the things', () => {
 
   it('Should throw when using correct secret', (done) => {
     var ks
-    ks = require('..')(secret, port, (err) => {
-      if (err) {
-        ks.stop()
-        err.message.should.equal('Killing process!')
+    ks = require('..').init(secret, port, (err, server) => {
+      should(err).equal(undefined)
+      server.on('killed', () => {
+        server.close()
         done()
-      }
+      })
       request.get('/' + secret)
         .expect(200)
         .end(() => {
@@ -51,7 +52,7 @@ describe('All the things', () => {
     const ks = proxyquire('..', {
       'app-root-path': arStub
     })
-    ks().autoStart((err) => {
+    ks.autoStart((err) => {
       err.message.should.equal("ENOENT: no such file or directory, open '/etc/non-existing/.kill-switch.json'")
       done()
     })
@@ -61,8 +62,7 @@ describe('All the things', () => {
     const ks = proxyquire('..', {
       fs: fsStub
     })
-    let killer = ks()
-    killer.autoStart((err) => {
+    ks.autoStart((err) => {
       err.message.should.match(/JSON/)
       done()
     })
@@ -75,15 +75,12 @@ describe('All the things', () => {
     const ks = proxyquire('..', {
       fs: fsStub
     })
-    let killer = ks()
-    killer.autoStart((err) => {
-      if (err) {
-        if (err.message !== 'Killing process!') {
-          return done(err)
-        }
-        killer.stop()
-        return done()
-      }
+    ks.autoStart((err, server) => {
+      should(err).equal(undefined)
+      server.on('killed', () => {
+        server.close()
+        done()
+      })
       request.get('/' + secret)
       .expect(200)
       .end(() => {
