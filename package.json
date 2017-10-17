@@ -30,10 +30,11 @@
     "cz-conventional-changelog": "^2.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
+    "proxyquire": "^1.8.0",
+    "semantic-release": "^8.2.0",
     "should": "^13.1.2",
     "standard": "^10.0.3",
-    "supertest": "^3.0.0",
-    "semantic-release": "^8.2.0"
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "app-root-path": "^2.0.1"
