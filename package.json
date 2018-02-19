@@ -33,7 +33,7 @@
     "proxyquire": "^1.8.0",
     "semantic-release": "^12.2.2",
     "should": "^13.1.2",
-    "standard": "^10.0.3",
+    "standard": "^11.0.0",
     "supertest": "^3.0.0"
   },
   "dependencies": {
