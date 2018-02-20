@@ -81,9 +81,9 @@ describe('All the things', () => {
         done()
       })
       request.get('/' + secret)
-      .expect(200)
-      .end(() => {
-      })
+        .expect(200)
+        .end(() => {
+        })
     })
   })
 })
