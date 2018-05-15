@@ -18,6 +18,8 @@ let arStub = {
   }
 }
 
+let etStub = () => {}
+
 describe('All the things', () => {
   it('Should start a server and return something on a wrong secret', (done) => {
     let ks = require('..').init(secret, port, (err, server) => {
@@ -33,11 +35,12 @@ describe('All the things', () => {
   })
 
   it('Should throw when using correct secret', (done) => {
-    let ks = require('..').init(secret, port, (err, server) => {
+    let ks = proxyquire('..', {
+      './errorThrower': etStub
+    }).init(secret, port, (err, server) => {
       should(err).equal(undefined)
       server.on('killed', () => {
-        server.close()
-        done()
+        server.close(done)
       })
       request.get('/' + secret)
         .expect(200)
@@ -72,18 +75,24 @@ describe('All the things', () => {
       callback(null, `{"port": ${port}, "secret": "${secret}"}`)
     }
     const ks = proxyquire('..', {
-      fs: fsStub
+      fs: fsStub,
+      './errorThrower': etStub
     })
     ks.autoStart((err, server) => {
       should(err).equal(undefined)
       server.on('killed', () => {
-        server.close()
-        done()
+        server.close(done)
       })
       request.get('/' + secret)
         .expect(200)
         .end(() => {
         })
     })
+  })
+  it('Should throw an error when we ask it to', () => {
+    var et = require('../errorThrower')
+    ;(function () {
+      et(new Error('TEST ERROR'))
+    }).should.throw('TEST ERROR')
   })
 })

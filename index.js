@@ -1,5 +1,6 @@
 'use strict'
 const http = require('http')
+const errorThrower = require('./errorThrower')
 const util = require('util')
 const appDir = require('app-root-path')
 const fs = require('fs')
@@ -16,7 +17,8 @@ const start = (config) => {
       let err = new Error('Killing process!')
       // Even if the callback is not defined, this will now throw
       server.emit('killed', err)
-      throw err
+      errorThrower(err)
+      return
     }
     res.statusCode = 403
     res.setHeader('Content-Type', 'text/plain')
