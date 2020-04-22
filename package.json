@@ -37,7 +37,7 @@
     "supertest": "^4.0.0"
   },
   "dependencies": {
-    "app-root-path": "^2.0.1"
+    "app-root-path": "^3.0.0"
   },
   "config": {
     "commitizen": {
